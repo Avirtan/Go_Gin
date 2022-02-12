@@ -1,0 +1,236 @@
+definitions:
+  ProfileController.CharacterType:
+    properties:
+      bottom:
+        example: 0
+        type: integer
+      eyes:
+        example: 0
+        type: integer
+      hair:
+        example: 0
+        type: integer
+      mouth:
+        example: 0
+        type: integer
+      nose:
+        example: 0
+        type: integer
+      other:
+        type: integer
+      shoes:
+        example: 0
+        type: integer
+      top:
+        example: 0
+        type: integer
+      weapon:
+        type: integer
+    required:
+    - bottom
+    - eyes
+    - hair
+    - mouth
+    - nose
+    - shoes
+    - top
+    type: object
+  profile.Achivement:
+    properties:
+      icon:
+        $ref: '#/definitions/profile.Icon'
+      id:
+        type: integer
+      name:
+        type: string
+      state:
+        type: string
+      value:
+        type: integer
+    type: object
+  profile.Character:
+    properties:
+      bottomID:
+        type: integer
+      eyeID:
+        type: integer
+      hairID:
+        type: integer
+      id:
+        type: integer
+      mouthID:
+        type: integer
+      noseID:
+        type: integer
+      otherID:
+        type: integer
+      shoeID:
+        type: integer
+      topID:
+        type: integer
+      userID:
+        type: string
+      weaponID:
+        type: integer
+    type: object
+  profile.Icon:
+    properties:
+      achivementID:
+        type: integer
+      createdAt:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      path:
+        type: string
+      user:
+        items:
+          $ref: '#/definitions/profile.User'
+        type: array
+    type: object
+  profile.Role:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  profile.Statistic:
+    properties:
+      achivements:
+        items:
+          $ref: '#/definitions/profile.Achivement'
+        type: array
+      doneQuest:
+        type: integer
+      earned:
+        type: integer
+      grade:
+        type: integer
+      id:
+        type: integer
+      sentQuest:
+        type: integer
+      spent:
+        type: integer
+      userID:
+        type: string
+    type: object
+  profile.User:
+    properties:
+      character:
+        $ref: '#/definitions/profile.Character'
+      createAt:
+        type: string
+      email:
+        type: string
+      icon:
+        type: integer
+      id:
+        type: string
+      level:
+        type: integer
+      login:
+        type: string
+      nickname:
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/profile.Role'
+        type: array
+      statistic:
+        $ref: '#/definitions/profile.Statistic'
+      verification:
+        type: boolean
+    type: object
+host: 192.168.1.185
+info:
+  contact:
+    url: http://work-craft.ru
+  description: This is a profile service.
+  title: Profile Work_Craft
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: GetProfile
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/profile.User'
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: GetProfile
+      tags:
+      - profile
+  /character:
+    post:
+      description: CreateCharacter
+      parameters:
+      - description: character
+        in: body
+        name: chat
+        required: true
+        schema:
+          $ref: '#/definitions/ProfileController.CharacterType'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/profile.Character'
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: CreateCharacter
+      tags:
+      - character
+  /items:
+    get:
+      description: GetItmes
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: GetItems
+      tags:
+      - items
+  /items/user:
+    get:
+      description: GetUserItmes
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: GetUserItems
+      tags:
+      - items
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

@@ -1,0 +1,136 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a auth service.",
+        "title": "Auth Work_Craft",
+        "contact": {
+            "url": "http://work-craft.ru"
+        },
+        "version": "1.0"
+    },
+    "host": "192.168.1.185",
+    "paths": {
+        "/login": {
+            "post": {
+                "description": "login user by json",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "login user",
+                "parameters": [
+                    {
+                        "description": "login user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AuthController.LoginType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        },
+        "/reg": {
+            "post": {
+                "description": "registration user by json",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user"
+                ],
+                "summary": "registration user",
+                "parameters": [
+                    {
+                        "description": "registration user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AuthController.RegistrationType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "AuthController.LoginType": {
+            "type": "object",
+            "required": [
+                "password"
+            ],
+            "properties": {
+                "login": {
+                    "type": "string",
+                    "example": "root"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 5,
+                    "example": "root1234"
+                }
+            }
+        },
+        "AuthController.RegistrationType": {
+            "type": "object",
+            "required": [
+                "email",
+                "login",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "root@mail.ru"
+                },
+                "login": {
+                    "type": "string",
+                    "example": "root"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 5,
+                    "example": "root1234"
+                }
+            }
+        }
+    }
+}

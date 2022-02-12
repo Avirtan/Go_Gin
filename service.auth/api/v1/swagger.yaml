@@ -1,0 +1,91 @@
+definitions:
+  AuthController.LoginType:
+    properties:
+      login:
+        example: root
+        type: string
+      password:
+        example: root1234
+        minLength: 5
+        type: string
+    required:
+    - password
+    type: object
+  AuthController.RegistrationType:
+    properties:
+      email:
+        example: root@mail.ru
+        type: string
+      login:
+        example: root
+        type: string
+      password:
+        example: root1234
+        minLength: 5
+        type: string
+    required:
+    - email
+    - login
+    - password
+    type: object
+host: 192.168.1.185
+info:
+  contact:
+    url: http://work-craft.ru
+  description: This is a auth service.
+  title: Auth Work_Craft
+  version: "1.0"
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: login user by json
+      parameters:
+      - description: login user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/AuthController.LoginType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      summary: login user
+      tags:
+      - user
+  /reg:
+    post:
+      consumes:
+      - application/json
+      description: registration user by json
+      parameters:
+      - description: registration user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/AuthController.RegistrationType'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      summary: registration user
+      tags:
+      - user
+swagger: "2.0"

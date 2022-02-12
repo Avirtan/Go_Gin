@@ -1,0 +1,172 @@
+definitions:
+  ChatController.Chat:
+    properties:
+      name:
+        example: Chan1
+        type: string
+    required:
+    - name
+    type: object
+host: 0.0.0.0:3001
+info:
+  contact:
+    url: http://work-craft.ru
+  description: This is a chat service.
+  title: Chat Work_Craft
+  version: "1.0"
+paths:
+  /all:
+    get:
+      description: get all chat
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: Chat
+      tags:
+      - Chat
+  /create:
+    post:
+      consumes:
+      - application/json
+      description: creat chat by json
+      parameters:
+      - description: chat
+        in: body
+        name: chat
+        required: true
+        schema:
+          $ref: '#/definitions/ChatController.Chat'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: Chat
+      tags:
+      - Chat
+  /delete:
+    delete:
+      consumes:
+      - application/json
+      description: delete chat by json
+      parameters:
+      - description: chat
+        in: body
+        name: chat
+        required: true
+        schema:
+          $ref: '#/definitions/ChatController.Chat'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: Chat
+      tags:
+      - Chat
+  /getUser:
+    post:
+      consumes:
+      - application/json
+      description: get user from chat by json
+      parameters:
+      - description: chat
+        in: body
+        name: chat
+        required: true
+        schema:
+          $ref: '#/definitions/ChatController.Chat'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: Chat
+      tags:
+      - Chat
+  /join:
+    post:
+      consumes:
+      - application/json
+      description: join to chat by json
+      parameters:
+      - description: chat
+        in: body
+        name: chat
+        required: true
+        schema:
+          $ref: '#/definitions/ChatController.Chat'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: Chat
+      tags:
+      - Chat
+  /ws/chat/:name/:token:
+    get:
+      description: connect to chat ws
+      parameters:
+      - description: name chat
+        in: query
+        name: name
+        required: true
+        type: string
+      - description: token user
+        in: query
+        name: token
+        required: true
+        type: string
+      responses: {}
+      summary: Chat
+      tags:
+      - Chat
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

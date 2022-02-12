@@ -1,0 +1,1 @@
+swag init --pd=true --output=../api/v1/

@@ -1,0 +1,23 @@
+sql/
+.vscode/
+public/
+build/
+.env
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.test
+
+*.out
+
+go.work
+
+OLD CODE/
+service.quest/
+service.question/
+service.news/
+
+.env.*
